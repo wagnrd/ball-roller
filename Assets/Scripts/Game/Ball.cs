@@ -1,11 +1,12 @@
 #nullable enable
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    [SerializeField] private float _acceleration;
+    [SerializeField] private float _gravity;
+    
     private void Start()
     {
         
