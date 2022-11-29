@@ -1,3 +1,5 @@
+#nullable enable
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +11,11 @@ public class Board : MonoBehaviour
     private Vector2 _lastMousePosition = Vector2.negativeInfinity;
     private Vector3 _boardRotation;
     
+    /******************
+     * public methods *
+     ******************/
+    public Vector3 Rotation => _boardRotation;
+
     public void OnMousePositionChange(InputAction.CallbackContext context)
     {
         var mousePosition = context.ReadValue<Vector2>();
