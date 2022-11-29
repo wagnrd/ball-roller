@@ -1,15 +1,27 @@
 #nullable enable
 
+using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.InputSystem;
 
 public class Board : MonoBehaviour
 {
+    [SerializeField] private Collider _goal;
     [SerializeField] private float _tiltSpeed;
     [SerializeField] private float _maxTiltDegrees;
     
     private Vector2 _lastMousePosition = Vector2.negativeInfinity;
     private Vector3 _boardRotation;
+    
+    /*****************
+     * Unity methods *
+     *****************/
+    public void Start()
+    {
+        Assert.IsTrue(_goal.isTrigger, "Goal is not a trigger!");
+        
+    }
     
     /******************
      * public methods *
