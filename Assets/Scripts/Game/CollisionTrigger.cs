@@ -1,12 +1,14 @@
 #nullable enable
 
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
 
-public class Finish : MonoBehaviour
+public class CollisionTrigger : MonoBehaviour
 {
-    [SerializeField] private OnGoalReach? _onGoalReach;
+    [SerializeField] private List<OnEnter> _onEnter = new List<OnEnter>();
     
     /*****************
      * Unity methods *
@@ -23,12 +25,14 @@ public class Finish : MonoBehaviour
      *******************/
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger!");
+        foreach (var listener in _onEnter)
+            listener?.Invoke();
     }
     
     /**********
      * Events *
      **********/
-    public class OnGoalReach : UnityEvent 
+    [Serializable]
+    public class OnEnter : UnityEvent 
     {}
 }

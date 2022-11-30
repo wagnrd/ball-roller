@@ -2,26 +2,20 @@
 
 using System;
 using UnityEngine;
-using UnityEngine.Assertions;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class Board : MonoBehaviour
 {
-    [SerializeField] private Collider _goal;
+    [Header("Events")]
+    public OnFail? _onFinish;
+    public OnFail? _onFail;
+    
     [SerializeField] private float _tiltSpeed;
     [SerializeField] private float _maxTiltDegrees;
     
     private Vector2 _lastMousePosition = Vector2.negativeInfinity;
     private Vector3 _boardRotation;
-    
-    /*****************
-     * Unity methods *
-     *****************/
-    public void Start()
-    {
-        Assert.IsTrue(_goal.isTrigger, "Goal is not a trigger!");
-        
-    }
     
     /******************
      * public methods *
@@ -48,4 +42,25 @@ public class Board : MonoBehaviour
 
         _lastMousePosition = mousePosition;
     }
+
+    public void TriggerFinish()
+    {
+        _onFinish?.Invoke();
+    }
+
+    public void TriggerFail()
+    {
+        _onFail?.Invoke();
+    }
+    
+    /**********
+     * Events * 
+     **********/
+    [Serializable]
+    public class OnFinish : UnityEvent
+    {}
+    
+    [Serializable]
+    public class OnFail : UnityEvent
+    {}
 }
